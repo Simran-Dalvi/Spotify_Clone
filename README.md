@@ -15,3 +15,9 @@ This project is to make a spotify clone using HTML, CSS, JavaScript and run song
 the page has:
 interactive play pause button
 list / tiles of songs 
+
+
+ToDo:
+* Add cover while playing the song
+* show time completed near progress bar
+* add volume button
