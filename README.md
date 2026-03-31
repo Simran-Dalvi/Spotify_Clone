@@ -21,3 +21,5 @@ ToDo:
 * Add cover while playing the song
 * show time completed near progress bar
 * add volume button
+* Smooth use of progress bar
+* make the whole card playable instead of just the play button

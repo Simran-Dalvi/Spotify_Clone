@@ -23,22 +23,30 @@ Put a file named favicon.ico in your project root
 
 //  Song list
 let songs = [
-    {songName: "How It,s Done - Hunter/X", filePath : "songs/1.mp3" , coverPath: "cover/1.jpg"},
-    {songName: "Golden - Hunter/X", filePath : "songs/2.mp3" , coverPath: "cover/2.jpg"},
-    {songName: "Soda Pop - Saja Boys", filePath : "songs/3.mp3" , coverPath: "cover/3.jpg"},
-    {songName: " Takedown - Hunter/X", filePath : "songs/4.mp3" , coverPath: "cover/4.jpg"},
-    {songName: "Your Idol - Saja Boys", filePath : "songs/5.mp3" , coverPath: "cover/5.jpg"},
-    {songName: "Free - Rumi, Jinu", filePath : "songs/6.mp3" , coverPath: "cover/6.jpg"},
-    {songName: "What It Sounds Like - Hunter/X", filePath : "songs/7.mp3" , coverPath: "cover/7.jpg"},
-    {songName: "Stratergy - TWICE", filePath : "songs/8.mp3" , coverPath: "cover/8.jpg"},
+    {timestamp:"2:56" ,songName: "How It,s Done - Hunter/X", filePath : "songs/1.mp3" , coverPath: "cover/1.jpg"},
+    {timestamp:"3:14" ,songName: "Golden - Hunter/X", filePath : "songs/2.mp3" , coverPath: "cover/2.jpg"},
+    {timestamp:"2:30" ,songName: "Soda Pop - Saja Boys", filePath : "songs/3.mp3" , coverPath: "cover/3.jpg"},
+    {timestamp:"3:02" ,songName: " Takedown - Hunter/X", filePath : "songs/4.mp3" , coverPath: "cover/4.jpg"},
+    {timestamp:"3:11" ,songName: "Your Idol - Saja Boys", filePath : "songs/5.mp3" , coverPath: "cover/5.jpg"},
+    {timestamp:"3:08" ,songName: "Free - Rumi, Jinu", filePath : "songs/6.mp3" , coverPath: "cover/6.jpg"},
+    {timestamp:"4:10" ,songName: "What It Sounds Like - Hunter/X", filePath : "songs/7.mp3" , coverPath: "cover/7.jpg"},
+    {timestamp:"2:46" ,songName: "Stratergy - TWICE", filePath : "songs/8.mp3" , coverPath: "cover/8.jpg"},
 ]
 
 let songIndex = 0; // always start song from 0th index
 let masterPlayButton = document.getElementById("masterPlayButton");
 let myProgressBar = document.getElementById("songprogress");
 let gif = document.getElementById("gif");
+let songItem = Array.from(document.getElementsByClassName("songitem"));
 
 let audioElement = new Audio(src = "songs/1.mp3");
+
+// produce name and cover from list
+songItem.forEach((element, i)=>{
+    element.getElementsByTagName("img")[0].src = songs[i].coverPath;
+    element.getElementsByClassName("songname")[0].innerText = songs[i].songName;
+    element.getElementsByClassName("timestamp")[0].innerText = songs[i].timestamp;
+});
 
 // Master Play-Pause Clicker
 masterPlayButton.addEventListener('click', ()=>{
@@ -64,4 +72,16 @@ audioElement.addEventListener('timeupdate', ()=>{
     progress = parseInt((audioElement.currentTime / audioElement.duration) * 100);
     console.log(progress);
     myProgressBar.value = progress;
+});
+
+// Progress bar
+myProgressBar.addEventListener('change', ()=>{
+    audioElement.currentTime = myProgressBar.value * audioElement.duration/100 ;
+});
+
+// Play songs in the list
+Array.from(document.getElementsByClassName("songitemplay")).forEach((element)=>{
+    element.addEventListener('click', (e)=>{
+        console.log(e)
+    });
 });
