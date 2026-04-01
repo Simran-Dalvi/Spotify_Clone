@@ -120,6 +120,7 @@ nav ul li{
 .container{
     margin: 0 90px;
     padding: 20px;
+    padding-bottom: 110px;
     color: azure;
     background-color: black;
     background-image: url("images/bg.jpg");

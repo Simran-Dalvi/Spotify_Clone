@@ -38,8 +38,9 @@ let masterPlayButton = document.getElementById("masterPlayButton");
 let myProgressBar = document.getElementById("songprogress");
 let gif = document.getElementById("gif");
 let songItem = Array.from(document.getElementsByClassName("songitem"));
+let masterSongName = document.getElementById("mastersongname");
 
-let audioElement = new Audio(src = "songs/1.mp3");
+let audioElement = new Audio(src = `songs/${songIndex + 1}.mp3`);
 
 // produce name and cover from list
 songItem.forEach((element, i)=>{
@@ -54,6 +55,7 @@ masterPlayButton.addEventListener('click', ()=>{
         audioElement.play();
         masterPlayButton.classList.remove('fa-circle-play');
         masterPlayButton.classList.add('fa-circle-pause');
+        masterSongName.innerText = songs[songIndex].songName;
         gif.style.opacity = 1;
     }
     else {
@@ -79,9 +81,64 @@ myProgressBar.addEventListener('change', ()=>{
     audioElement.currentTime = myProgressBar.value * audioElement.duration/100 ;
 });
 
+// Helper for song-item-play button
+const makeAllPlays = () =>{
+    Array.from(document.getElementsByClassName("songitemplay")).forEach((element)=>{
+        element.classList.remove('fa-circle-pause');
+        element.classList.add('fa-circle-play');
+        // element.classList.remove("active");
+    });
+};
+
 // Play songs in the list
 Array.from(document.getElementsByClassName("songitemplay")).forEach((element)=>{
     element.addEventListener('click', (e)=>{
-        console.log(e)
+        makeAllPlays();
+        songIndex = parseInt(e.target.id);
+        masterSongName.innerText = songs[songIndex].songName;
+        e.target.classList.remove('fa-circle-play');
+        e.target.classList.add('fa-circle-pause');
+        // select the song
+        // e.target.classList.add("active")
+        audioElement.src = `songs/${songIndex + 1}.mp3`;
+        audioElement.currentTime = 0 ;
+        audioElement.play();
+        masterPlayButton.classList.remove('fa-circle-play');
+        masterPlayButton.classList.add('fa-circle-pause');
+        gif.style.opacity = 1;
     });
+});
+
+// master previous button
+document.getElementById("previous").addEventListener('click', ()=>{
+    if (songIndex <= 0){
+        songIndex = 7;
+    }
+    else{
+        songIndex -= 1;
+    }
+    masterSongName.innerText = songs[songIndex].songName;
+    audioElement.src = `songs/${songIndex +1}.mp3`;
+    audioElement.currentTime = 0;
+    audioElement.play();
+    masterPlayButton.classList.remove('fa-circle-play');
+    masterPlayButton.classList.add('fa-circle-pause');
+    gif.style.opacity = 1;
+});
+
+// master next button
+document.getElementById("next").addEventListener('click', ()=>{
+    if (songIndex >= 7){
+        songIndex = 0;
+    }
+    else{
+        songIndex += 1;
+    }
+    masterSongName.innerText = songs[songIndex].songName;
+    audioElement.src = `songs/${songIndex + 1}.mp3`;
+    audioElement.currentTime = 0;
+    audioElement.play();
+    masterPlayButton.classList.remove('fa-circle-play');
+    masterPlayButton.classList.add('fa-circle-pause');
+    gif.style.opacity = 1;
 });

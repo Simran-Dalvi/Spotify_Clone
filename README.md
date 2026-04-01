@@ -23,3 +23,14 @@ ToDo:
 * add volume button
 * Smooth use of progress bar
 * make the whole card playable instead of just the play button
+* change the icon for the song thats playing
+* make the song list play button playable/pausable
+* make it responsive ???
+    * make ony the icon show for the card and clicking on it plays and pauses the song
+    * the bg image gets distorted
+    * scrolling down for the master payer bar
+    * the navigation bar breaks
+    * master play bar only show cover and gif when song plays 
+    * media query ? responsive design?
+* next needs to play on its own if current song ends
+* add a favicon
